@@ -10,30 +10,27 @@ function updateViewportHeight() {
 function handleResize(...subjects) {
   return ({ target }) => {
     updateViewportHeight();
-    subjects.forEach(s => s.update(target));
+    subjects.forEach((s) => s.update(target));
   };
 }
 
-class Subject {
-  #element = null;
-  
-  constructor(element) { this.#element = element; }
-  
-  update({ innerWidth, innerHeight }) {
-    const { width, height } = getComputedStyle(this.#element);
-    const scale = Math.min(
-      innerWidth / parseInt(trimUnits(width)),
-      innerHeight / parseInt(trimUnits(height))
-    );
-    this.#element.style.transform = `scale(${scale})`;
-  }
-}
-
 function main(_) {
-  const subject = new Subject(document.querySelector("#virtual-viewport"));
-  const handleResizeMemo = handleResize(subject);
-  window.addEventListener("resize", handleResizeMemo);
   updateViewportHeight();
+  const subject = {
+    element: document.querySelector("#virtual-viewport"),
+    update({ innerWidth, innerHeight }) {
+      const { width, height } = getComputedStyle(this.element);
+      const scale = Math.min(
+        innerWidth / parseFloat(trimUnits(width)),
+        innerHeight / parseFloat(trimUnits(height))
+      );
+      this.element.style.transform = `scale(${scale})`;
+    },
+  };
+
+  const handleResizeMemo = handleResize(subject);
+  handleResizeMemo({target: window})
+  window.addEventListener("resize", handleResizeMemo);
 }
 
 window.addEventListener("DOMContentLoaded", main);
