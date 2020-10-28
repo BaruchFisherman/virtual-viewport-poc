@@ -2,20 +2,22 @@ function trimUnits(size) {
   return size.slice(0, size.length - 2);
 }
 
-function updateViewportHeight() {
+function updateViewportUnits() {
   const vh = window.innerHeight * 0.01;
   document.documentElement.style.setProperty("--vh", `${vh}px`);
+  const vw = window.innerWidth * 0.01;
+  document.documentElement.style.setProperty("--vw", `${vw}px`);
 }
 
 function handleResize(...subjects) {
   return ({ target }) => {
-    updateViewportHeight();
+    updateViewportUnits();
     subjects.forEach((s) => s.update(target));
   };
 }
 
 function main(_) {
-  updateViewportHeight();
+  updateViewportUnits();
   const subject = {
     element: document.querySelector("#virtual-viewport"),
     update({ innerWidth, innerHeight }) {

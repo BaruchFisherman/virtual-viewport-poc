@@ -4,20 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="src/style.css" />
   </head>
   <body>
-    <main id="root" class="flex--column middle center">
+    <main id="root">
       <section id="virtual-viewport">
-        <section id="top-group"></section>
+        <section id="left-group" class="flex row mid-center">LEFT</section>
+        <section id="top-group" class="flex column mid-center">TOP</section>
         <picture id="poker-table">
           <source media="screen and (orientation: landscape)" srcset="assets/table-landscape.png">
           <img src="assets/table-portrait.png" />
         </picture>
-        <section id="bottom-group" class="flex--column middle center">TEST</section>
+        <section id="bottom-group" class="flex column mid-center">BOTTOM</section>
+        <section id="right-group" class="flex row mid-center">RIGHT</section>
       </section>
     </main>
 
-    <script src="main.js"></script>
+    <script src="src/index.js"></script>
   </body>
 </html>

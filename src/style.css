@@ -1,0 +1,192 @@
+/* #region CSS reset */
+:root {
+  --virtual-viewport-horizontal-padding: 0.8rem;
+  --virtual-viewport-bottom-padding: 1rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+html {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: calc((10 / var(--screen-min-width)) * 100vw);;
+  color: white;
+}
+
+body {
+  margin: 0;
+  background: transparent
+    linear-gradient(
+      180deg,
+      #03070c 0%,
+      #07101a 10%,
+      #0a1927 22%,
+      #0a131e 37%,
+      #070e16 56%,
+      #070a0f 74%,
+      #09131f 89%,
+      #06090c 100%
+    )
+    0% 0% no-repeat padding-box;
+  opacity: 1;
+}
+/* #endregion */
+
+/* #region Utilities */
+.flex {
+  display: flex;
+}
+
+.flex.column {
+  flex-flow: column nowrap;
+}
+
+.flex.row {
+  flex-flow: row nowrap;
+}
+
+.flex.row.mid-center,
+.flex.column.mid-center {
+  justify-content: center;
+  align-items: center;;
+}
+/* #endregion */
+
+#virtual-viewport {
+  background-color: #FBE7C677;
+}
+
+#poker-table {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#top-group,
+#left-group {
+  background-color: lightcoral;
+  opacity: 0.5;
+}
+
+#bottom-group,
+#right-group {
+  background-color: limegreen;
+  opacity: 0.5;
+}
+
+@media screen and (orientation: portrait) {
+  :root {
+    --screen-min-width: 340;
+  }
+
+  #root {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #virtual-viewport {
+    width: 34rem;
+    height: 55.3rem;
+
+    position: relative;
+  }
+
+  #poker-table {
+    margin-top: 3.5rem;
+  }
+
+  #poker-table img {
+    width: 34rem;
+    height: 44.3rem;
+  }
+
+  #top-group {
+    height: 5.1rem;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 var(--virtual-viewport-bottom-padding);
+    z-index: 200;
+    top: min(0%, calc(((100 * var(--vh)) - 100%) / -2));
+  }
+
+  #bottom-group {
+    height: 17.1rem;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 var(--virtual-viewport-horizontal-padding) 1rem
+      var(--virtual-viewport-horizontal-padding);
+    z-index: 200;
+    bottom: min(0%, calc(((100 * var(--vh)) - 100%) / -2));
+  }
+
+  #left-group {
+    display: none;
+  }
+  #right-group {
+    display: none;
+  }
+}
+
+@media screen and (orientation: landscape) {
+  :root {
+    --screen-min-width: 640;
+  }
+
+  #root {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #virtual-viewport {
+    width: 64rem;
+    height: 30rem;
+
+    position: relative;
+  }
+
+  #poker-table {
+    margin: 2rem auto 0 auto;
+  }
+
+  #poker-table img {
+    width: 52.4rem;
+    height: 23.9rem;
+  }
+
+  #left-group {
+    position: absolute;
+    top: 0;
+    left: calc(((100 * var(--vw)) - 640px) / -2);
+    z-index: 200;
+    width: 50%;
+    height: 100%;
+  }
+  #right-group {
+    position: absolute;
+    top: 0;
+    right: calc(((100 * var(--vw)) - 640px) / -2);
+    z-index: 200;
+    width: 50%;
+    height: 100%;
+  }
+
+  #top-group {
+    display: none;
+  }
+  #bottom-group {
+    display: none;
+  }
+}
